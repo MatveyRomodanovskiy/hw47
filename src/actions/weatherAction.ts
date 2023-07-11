@@ -1,10 +1,11 @@
 import {api_key, base_url, WeatherInfo} from "../utils/constants";
 import {clear, error, pending} from "../slices/messageSlice";
 import {putWeather} from "../slices/weatherSlice";
+import {AppDispatch} from "../app/store";
 
 
 export const fetchWeather = (city: string)  => {
-    return async (dispatch: (arg0: { payload: any; type: "message/pending" | "weather/putWeather" | "message/clear" | "message/error"; }) => void) => {
+    return async (dispatch:  AppDispatch) => {
         dispatch(pending())
         try {
             const response = await fetch(`${base_url}?q=${city}&appid=${api_key}&units=metric`);
